@@ -1,3 +1,11 @@
+<?php
+
+require_once 'classes/Task.php';
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -22,26 +30,23 @@
 <body class="bg-success-subtle text-center cabin-sketch-regular">
 
     <div class="py-3 mb-3 text-white bg-success bg-gradient">
-        <h1 class="text-center cabin-sketch-bold">Tout Doux LISTE</h1>
+        <a href="index.php" class="text-decoration-none text-white">
+            <h1 class="text-center cabin-sketch-bold">Tout Doux LISTE</h1>
+        </a>
     </div>
 
-    <h2>Nouvelle tâche</h2>
+    <h2>A faire !!!</h2>
 
-    <form action="action.php?action=add" method="POST">
-
-        <div class="row justify-content-center m-0">
-            <div class="col-lg-4 col-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="title" placeholder="Nouvelle tâche" required>
-                    <button class="btn btn-success">Enregistrer</button>
-                </div>
+    <div class="row justify-content-center mx-0 mb-3">
+        <?php foreach (array_reverse($_SESSION['toutesLesTaches'], 1) as $index => $task) { ?>
+            <div class="m-2">
+                <a href="action.php?action=toggle&index=<?= $index ?>" class="btn text-success"><i class="bi bi-toggle-<?= $task->getIsDone() == false ? "off" : "on" ?> h2"></i></a>
+                <button class="btn btn-<?= $task->getIsDone() == false ? "outline-" : "" ?>success col-lg-4 col-8 text-start"><?= $task->getTitle() ?></button>
+                <a href="action.php?action=delete&index=<?= $index ?>" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
             </div>
-        </div>
+        <?php } ?>
+    </div>
 
-    </form>
-
-    <a href="todo.php" class="btn btn-success mt-4">Recap' des tâches</a>
+    <a href="index.php" class="btn btn-success">Nouvelle tâche</a>
 
 </body>
-
-</html>
