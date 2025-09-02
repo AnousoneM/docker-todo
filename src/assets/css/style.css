@@ -1,0 +1,10 @@
+.font-title {
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+img.img-logo {
+  height: 25vh !important;
+  width: auto !important;
+}
